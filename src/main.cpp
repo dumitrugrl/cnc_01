@@ -49,6 +49,8 @@ String moveAxis = "Z"; // Set for default axis on power //#2 - Z axis
 String moveAxis2 = ""; // Set for default axis on power //#2 - Z axis
 float moveRes = 0.01;  // Set for default axis on power //#2 - 1mm resolution
 float feedRate = 10.0;
+String gsMoveRes = "";
+String gsFeedRate = "";
 
 String currentDir = "";
 
@@ -127,7 +129,7 @@ void dispatchCommand(bool bRequiresAuth = true, bool bM117 = true)
   commandBuffer[0] = '\0';
 }
 
-void sendSerialCommand_MoveByEncoder()
+void dispatchCommand_MoveByEncoder()
 {
   if (!canSendCommand())
     return;
@@ -135,12 +137,12 @@ void sendSerialCommand_MoveByEncoder()
   // dispatchCommand(true, false);
   // dtostrf(moveRes, 6, 2, moveresBuff); // 8 char min total width, 6 after decimal
 
-  String sMoveRes = String(moveRes);
-  String sFeedRate = String(feedRate);
+  // String sMoveRes = String(moveRes);
+  // String sFeedRate = String(feedRate);
 
-  sprintf(commandBuffer, "G91 %s%s%s %s%s%s F%s\0", moveAxis.c_str(), currentDir.c_str(), sMoveRes.c_str(),
-          moveAxis2 != "" ? moveAxis2.c_str() : "", moveAxis2 != "" ? currentDir.c_str() : "", moveAxis2 != "" ? sMoveRes.c_str() : "",
-          sFeedRate.c_str());
+  sprintf(commandBuffer, "G91 %s%s%s %s%s%s F%s\0", moveAxis.c_str(), currentDir.c_str(), gsMoveRes.c_str(),
+          moveAxis2 != "" ? moveAxis2.c_str() : "", moveAxis2 != "" ? currentDir.c_str() : "", moveAxis2 != "" ? gsMoveRes.c_str() : "",
+          gsFeedRate.c_str());
 
   Serial.println("G91");
   Serial.println(commandBuffer);
@@ -230,6 +232,8 @@ void setRes(KeypadEvent ekey)
     break;
   }
 
+  gsMoveRes = String(moveRes);
+
   oledUpdate();
   sendM117_variables();
 }
@@ -251,6 +255,8 @@ void setFeed(KeypadEvent ekey)
     feedRate = 240.0;
     break;
   }
+
+  gsFeedRate = String(feedRate);
 
   oledUpdate();
   sendM117_variables();
@@ -293,8 +299,7 @@ void keypadEvent(KeypadEvent ekey)
       setFeed(ekey);
       break;
 
-    case '*': // Set Brightness to LOW
-      // Serial.println(ekey);
+    case '*':
       sprintf(commandBuffer, "G28");
       dispatchCommand(true, true);
       break;
@@ -339,7 +344,6 @@ void interrupt()
   encoder.tick();
   // Serial.println("click");
 }
-
 
 void setup()
 {
@@ -405,7 +409,7 @@ void loop()
 
       prevPosition = position;
 
-      sendSerialCommand_MoveByEncoder();
+      dispatchCommand_MoveByEncoder();
     }
   }
   else
@@ -424,7 +428,7 @@ void loop()
 
       lastpos = pos;
 
-      sendSerialCommand_MoveByEncoder();
+      dispatchCommand_MoveByEncoder();
     }
   }
 
