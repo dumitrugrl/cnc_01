@@ -1,0 +1,4 @@
+{
+  "idf.portWin": "COM8",
+  "cmake.configureOnOpen": false
+}
