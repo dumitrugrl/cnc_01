@@ -42,7 +42,8 @@ F10       F50               F100          F240
 
 HOME      ZERO              Motor         Read
 XYZ       Abs               Off           SD
-G28       G92 X0 Y0 Z0      M84           M22 apoi M21
+G28       G92 X0 Y0 Z0      M84           M22 followed by
+                                          M21
 */
 
 String moveAxis = "Z"; // Set for default axis on power //#2 - Z axis
