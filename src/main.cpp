@@ -49,8 +49,8 @@ String moveAxis = "Z"; // Set for default axis on power //#2 - Z axis
 String moveAxis2 = ""; // Set for default axis on power //#2 - Z axis
 float moveRes = 0.01;  // Set for default axis on power //#2 - 1mm resolution
 float feedRate = 10.0;
-String gsMoveRes = "";
-String gsFeedRate = "";
+String gsMoveRes = "0.01";
+String gsFeedRate = "10.0";
 
 String currentDir = "";
 
