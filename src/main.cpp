@@ -32,24 +32,18 @@ void bootScreen()
 }
 
 /*
-X     Y               Z             XY
+        Keypad assignements
 
-0.01  0.1             1             10
+X       Y                 Z             XY
 
-F10   F50             F100          F240
+0.01    0.1               1             10
 
-HOME  ZERO            Motor         Read
-XYZ   Abs             Off           SD
-G28   G92 X0 Y0 Z0    M84           M22 apoi M21
+F10     F50               F100          F240
+
+HOME    ZERO              Motor         Read
+XYZ     Abs               Off           SD
+G28     G92 X0 Y0 Z0      M84           M22 apoi M21
 */
-
-// const String arrayAxis[3] = {"X", "Y", "Z"};
-// const int countAxis = 3;
-//  int selectedAxis = 2;  // Set for default axis on power //#2 - Z axis
-
-// const float arrayRes[4] = {0.01, 0.1, 1, 10};
-// const int countRes = 4; // set to # of variables in arrayRes
-// int selectedRes = 2;    // Set for default axis on power //#2 - 1mm resolution
 
 String moveAxis = "Z"; // Set for default axis on power //#2 - Z axis
 String moveAxis2 = ""; // Set for default axis on power //#2 - Z axis
