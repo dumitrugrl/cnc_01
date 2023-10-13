@@ -34,15 +34,15 @@ void bootScreen()
 /*
         Keypad assignements
 
-X       Y                 Z             XY
+X         Y                 Z             XY
 
-0.01    0.1               1             10
+0.01      0.1               1             10
 
-F10     F50               F100          F240
+F10       F50               F100          F240
 
-HOME    ZERO              Motor         Read
-XYZ     Abs               Off           SD
-G28     G92 X0 Y0 Z0      M84           M22 apoi M21
+HOME      ZERO              Motor         Read
+XYZ       Abs               Off           SD
+G28       G92 X0 Y0 Z0      M84           M22 apoi M21
 */
 
 String moveAxis = "Z"; // Set for default axis on power //#2 - Z axis
