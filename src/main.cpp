@@ -330,6 +330,9 @@ EncoderStepCounter encoder(ENCODER_PIN1, ENCODER_PIN2);
 signed long position = 0;
 signed long prevPosition = 0;
 
+bool bEncIntEnabled = true; // normal mode in loop or interrupt
+signed char lastpos = 0;
+
 // Call tick on every change interrupt
 void interrupt()
 {
@@ -337,8 +340,6 @@ void interrupt()
   // Serial.println("click");
 }
 
-bool bEncIntEnabled = true; // normal mode in loop or interrupt
-signed char lastpos = 0;
 
 void setup()
 {
