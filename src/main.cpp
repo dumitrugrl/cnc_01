@@ -141,7 +141,7 @@ void dispatchCommand_MoveByEncoder()
   // String sMoveRes = String(moveRes);
   // String sFeedRate = String(feedRate);
 
-  sprintf(commandBuffer, "G91 %s%s%s %s%s%s F%s\0", moveAxis.c_str(), currentDir.c_str(), gsMoveRes.c_str(),
+  sprintf(commandBuffer, "G1 %s%s%s %s%s%s F%s\0", moveAxis.c_str(), currentDir.c_str(), gsMoveRes.c_str(),
           moveAxis2 != "" ? moveAxis2.c_str() : "", moveAxis2 != "" ? currentDir.c_str() : "", moveAxis2 != "" ? gsMoveRes.c_str() : "",
           gsFeedRate.c_str());
 
