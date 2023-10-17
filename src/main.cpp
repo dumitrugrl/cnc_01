@@ -130,6 +130,7 @@ void dispatchCommand(bool bRequiresAuth = true, bool bM117 = true)
   commandBuffer[0] = '\0';
 }
 
+long int g91Dispatched = -1;
 void dispatchCommand_MoveByEncoder()
 {
   if (!canSendCommand())
@@ -145,9 +146,20 @@ void dispatchCommand_MoveByEncoder()
           moveAxis2 != "" ? moveAxis2.c_str() : "", moveAxis2 != "" ? currentDir.c_str() : "", moveAxis2 != "" ? gsMoveRes.c_str() : "",
           gsFeedRate.c_str());
 
-  Serial.println("G91");
+  if (g91Dispatched == -1)
+  {
+    Serial.println("G91");
+    g91Dispatched = millis();
+  }
+  else
+  {
+    g91Dispatched = millis();
+  }
+
   Serial.println(commandBuffer);
-  Serial.println("G90");
+
+  // --- only send if G91 was sent
+  // Serial.println("G90");
 
   displayCommandBuffer();
 
@@ -435,4 +447,14 @@ void loop()
 
   keypad.getKey(); // read keypad
   // delay(1);        // delay to help debounce
+
+  if (g91Dispatched != -1)
+  {
+    long int now = millis();
+    if (now - g91Dispatched >= 2000)
+    {
+      Serial.println("G90");
+      g91Dispatched = -1;
+    }
+  }
 }
