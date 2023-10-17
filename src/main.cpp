@@ -448,13 +448,13 @@ void loop()
   keypad.getKey(); // read keypad
   // delay(1);        // delay to help debounce
 
-  if (g91Dispatched != -1)
-  {
-    long int now = millis();
-    if (now - g91Dispatched >= 2000)
-    {
-      Serial.println("G90");
-      g91Dispatched = -1;
-    }
-  }
+  // if (g91Dispatched != -1)
+  // {
+  //   long int now = millis();
+  //   if (now - g91Dispatched >= 2000)
+  //   {
+  //     Serial.println("G90");
+  //     g91Dispatched = -1;
+  //   }
+  // }
 }
