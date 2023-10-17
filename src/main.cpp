@@ -159,7 +159,7 @@ void dispatchCommand_MoveByEncoder()
   Serial.println(commandBuffer);
 
   // --- only send if G91 was sent
-  // Serial.println("G90");
+  Serial.println("G90");
 
   displayCommandBuffer();
 
