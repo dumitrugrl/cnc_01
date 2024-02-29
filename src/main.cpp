@@ -284,6 +284,8 @@ void reinitSD(bool requiresAuth = false)
   dispatchCommand(requiresAuth, true);
 }
 
+bool bStopSent = false;
+
 void keypadEvent(KeypadEvent ekey)
 {
 
@@ -323,6 +325,7 @@ void keypadEvent(KeypadEvent ekey)
     case '#':
       sprintf(commandBuffer, "M84");
       dispatchCommand(false, true);
+      bStopSent = !bStopSent;
       break;
     case 'D':
       reinitSD(false);
