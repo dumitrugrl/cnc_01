@@ -146,20 +146,24 @@ void dispatchCommand_MoveByEncoder()
           moveAxis2 != "" ? moveAxis2.c_str() : "", moveAxis2 != "" ? currentDir.c_str() : "", moveAxis2 != "" ? gsMoveRes.c_str() : "",
           gsFeedRate.c_str());
 
-  // if (g91Dispatched == -1)
-  // {
-  //   Serial.println("G91");
-  //   g91Dispatched = millis();
-  // }
+  if (g91Dispatched == -1)
+  {
+    Serial.println("G91");
+    g91Dispatched = millis();
+  }
   // else
   // {
-  g91Dispatched = millis();
-  //}
+  //   g91Dispatched = millis();
+  // }
 
   Serial.println(commandBuffer);
 
   // --- only send if G91 was sent
-  Serial.println("G90");
+  if (g91Dispatched != -1)
+  {
+    Serial.println("G90");
+    g91Dispatched = -1;
+  }
 
   displayCommandBuffer();
 
